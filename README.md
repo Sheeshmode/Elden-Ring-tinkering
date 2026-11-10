@@ -43,6 +43,24 @@ The AR math follows the source project: scaling is the sum of (scaling value × 
 stat, unmet requirements replace the bonus with a 40% penalty, and two-handing multiplies Strength
 by 1.5 (rounded down), except for paired weapons.
 
+## The original calculator (`calculator/`)
+
+A copy of [ThomasJClark/elden-ring-weapon-calculator](https://github.com/ThomasJClark/elden-ring-weapon-calculator)
+at commit `3539d87` (MIT, see `calculator/COPYING`), without its git history. Its web app lists
+weapons by your stats, with AR and status buildup. Run it with `yarn install && yarn start` inside
+`calculator/`, or use the hosted version at [eldenring.tclark.io](https://eldenring.tclark.io/).
+
+To check `scripts/er_weapons.py` against that project's own code (needs Node 22.6+):
+
+```
+node --experimental-strip-types scripts/crosscheck_ref.mjs data/regulation-vanilla-v1.17.json ref.json
+python3 -I scripts/crosscheck_compare.py ref.json
+```
+
+It compares damage, status buildup, spell scaling, and unmet requirements for all 3,296 weapons across
+six stat spreads, one- and two-handed, at +0, +7, and max level. The comparison script's plumbing
+is tested on synthetic data. The reference run itself has not been done.
+
 ## Checks and limits
 
 - Checked against the Fextralife Uchigatana and Moonveil pages (wiki values are rounded down,
@@ -51,8 +69,10 @@ by 1.5 (rounded down), except for paired weapons.
   Fire, Lightning, Sacred, Magic, and Cold variants also match, but those figures came from a
   partly summarized read of the page.
 - The AR function was **not** cross-checked against the source project's own code. Running that
-  code was blocked in the session that built this. Treat AR output as unverified until you compare
-  a few weapons in the [tarnished.dev calculator](https://tarnished.dev/weapon-calculator).
+  code was blocked in the session that built this. Run the cross-check above, or compare a few
+  weapons in the [tarnished.dev calculator](https://tarnished.dev/weapon-calculator). Two outside
+  spell-scaling figures (Albinauric Staff 327, Carian Regal Scepter 373 at 80 Int, from a Reddit
+  build post) match this function within a point.
 - Not in this data: weight, guard negation, stability, critical modifier, skills, and
   weapon-specific passive effects other than status buildup.
 - Shadow of the Erdtree weapons are flagged `dlc`. The Scadutree Blessing damage bonus is not

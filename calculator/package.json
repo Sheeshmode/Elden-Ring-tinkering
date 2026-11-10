@@ -1,0 +1,77 @@
+{
+  "name": "eldenarcalc",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "Tom Clark",
+    "email": "tom@tclark.io"
+  },
+  "type": "module",
+  "packageManager": "yarn@4.8.1",
+  "dependencies": {
+    "@emotion/react": "11.10.6",
+    "@emotion/styled": "11.10.6",
+    "@mui/icons-material": "5.11.16",
+    "@mui/material": "5.12.2",
+    "@mui/system": "5.12.1",
+    "@radix-ui/react-scroll-area": "^1.0.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/node": "18.0.0",
+    "@types/react": "18.0.14",
+    "@types/react-dom": "18.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "debug": "^4.3.4",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.36.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "fast-xml-parser": "^4.2.7",
+    "prettier": "2.7.1",
+    "typescript": "5.0.4",
+    "vite": "^4.2.0",
+    "vite-plugin-eslint": "^1.8.1"
+  },
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "buildData": "node src/buildData.ts",
+    "buildData:latest": "node src/buildData.ts vanilla public/regulation-vanilla-v1.17.js",
+    "buildData:reforged": "node src/buildData.ts reforged public/regulation-reforged-v2.3.3.0.js",
+    "buildData:convergence": "node src/buildData.ts convergence public/regulation-convergence-v3.0.4.1.js",
+    "rebuildWeaponData": "yarn buildData:latest && yarn buildData:reforged && yarn buildData:convergence"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended",
+      "plugin:react/jsx-runtime",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "@typescript-eslint/no-non-null-assertion": "off"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "root": true
+  },
+  "prettier": {
+    "printWidth": 100,
+    "trailingComma": "all"
+  }
+}
